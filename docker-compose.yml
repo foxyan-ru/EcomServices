@@ -1,0 +1,31 @@
+version: "3.9"
+
+# Not tested/run as part of scaffolding this project. All three Dockerfiles
+# build from source, so `docker compose up --build` also requires the proto
+# stubs to exist first (../scripts/gen-proto.sh) for the Go and Python images.
+services:
+  inventory-service:
+    build: ./inventory-service
+    ports:
+      - "50051:50051"
+    environment:
+      INVENTORY_GRPC_ADDR: ":50051"
+
+  pricing-service:
+    build: ./pricing-service
+    ports:
+      - "50052:50052"
+    environment:
+      PRICING_GRPC_ADDR: "[::]:50052"
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      INVENTORY_GRPC_ADDR: "inventory-service:50051"
+      PRICING_GRPC_ADDR: "pricing-service:50052"
+    depends_on:
+      - inventory-service
+      - pricing-service

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package inventory;
+
+option go_package = "polywire/inventory-service/internal/pb;pb";
+
+// InventoryService is owned by the Go service. It answers "does this item
+// exist, and how many are in stock" — deliberately the only thing it knows
+// about. Pricing lives in a separate service (Python) so the gateway is the
+// only thing that ever needs to know a product is really two services.
+service InventoryService {
+  rpc GetItem(GetItemRequest) returns (Item);
+}
+
+message GetItemRequest {
+  string item_id = 1;
+}
+
+message Item {
+  string item_id = 1;
+  string name = 2;
+  int32 stock = 3;
+}

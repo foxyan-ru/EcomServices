@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+pricing/pricing_pb2.py
+pricing/pricing_pb2_grpc.py
+!pricing/README.md

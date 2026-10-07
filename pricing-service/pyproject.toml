@@ -1,0 +1,18 @@
+[project]
+name = "pricing-service"
+version = "0.1.0"
+description = "PricingService gRPC server for the PolyWire demo"
+requires-python = ">=3.12"
+dependencies = [
+    "grpcio>=1.68.1",
+    "protobuf>=5.28.3",
+]
+
+[dependency-groups]
+dev = [
+    "grpcio-tools>=1.68.1",
+]
+
+# Dependencies are declared but not installed/resolved — no `uv sync` or
+# `pip install` has been run. grpcio-tools is only needed to run
+# ../scripts/gen-proto.sh; the server itself only needs grpcio + protobuf.

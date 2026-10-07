@@ -1,0 +1,3 @@
+bin/
+*.pb.go
+!internal/pb/README.md

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pricing;
+
+// PricingService is owned by the Python service. It knows nothing about
+// stock levels — just "if this item exists, what does it cost."
+service PricingService {
+  rpc GetPrice(GetPriceRequest) returns (Price);
+}
+
+message GetPriceRequest {
+  string item_id = 1;
+}
+
+message Price {
+  string item_id = 1;
+  double amount = 2;
+  string currency = 3;
+}
